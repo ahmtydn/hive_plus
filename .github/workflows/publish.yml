@@ -1,0 +1,44 @@
+name: Publish to pub.dev
+
+# This workflow will publish the package to pub.dev when a new tag is pushed
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Triggers on version tags like v1.0.0, v1.2.3, etc.
+
+jobs:
+  publish:
+    name: Publish package
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+          
+      - name: Install dependencies
+        run: dart pub get
+        
+      - name: Verify package
+        run: dart pub publish --dry-run
+        
+      - name: Run tests
+        run: dart test
+        
+      - name: Check formatting
+        run: dart format -o none . --set-exit-if-changed
+        
+      - name: Analyze code
+        run: dart analyze --fatal-infos
+        
+      - name: pub.dev credentials
+        run: |
+          mkdir -p $HOME/.config/dart
+          echo '${{ secrets.PUB_JSON }}' >> $HOME/.config/dart/pub-credentials.json
+          
+      - name: Publish to pub.dev
+        run: dart pub publish --force
