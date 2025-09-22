@@ -1,4 +1,4 @@
-part of hive_plus;
+part of hive_plus_secure;
 
 /// Open boxes and register adapters.
 class Hive {

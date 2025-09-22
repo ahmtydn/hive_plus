@@ -61,7 +61,7 @@ void main() async {
 Woohoo! You're all set. Jump in and let your Hive adventure begin!
 
 ```dart
-import 'package:hive_plus/hive_plus.dart';
+import 'package:hive_plus_secure/hive_plus_secure.dart';
 
 final box = Hive.box();
 box.put('name', 'David');

@@ -1,4 +1,4 @@
-part of hive_plus;
+part of hive_plus_secure;
 
 const _builtinTypes = {
   bool: _TypeHandler<bool>.builtin(),

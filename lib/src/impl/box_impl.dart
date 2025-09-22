@@ -1,4 +1,4 @@
-part of hive_plus;
+part of hive_plus_secure;
 
 class _BoxImpl<E> implements Box<E> {
   _BoxImpl(this.isar) : collection = isar.frames;

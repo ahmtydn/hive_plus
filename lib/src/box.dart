@@ -1,4 +1,4 @@
-part of hive_plus;
+part of hive_plus_secure;
 
 /// A box contains and manages a collection of key-value pairs.
 abstract interface class Box<E> {

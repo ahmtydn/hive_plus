@@ -2,8 +2,8 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:hive_plus/hive_plus.dart';
-import 'package:hive_plus/src/impl/frame.dart';
+import 'package:hive_plus_secure/hive_plus_secure.dart';
+import 'package:hive_plus_secure/src/impl/frame.dart';
 import 'package:isar_plus/isar_plus.dart';
 import 'package:test/test.dart';
 
