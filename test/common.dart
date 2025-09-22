@@ -7,7 +7,7 @@ import 'package:hive_plus/src/impl/frame.dart';
 import 'package:isar_plus/isar_plus.dart';
 import 'package:test/test.dart';
 
-const _releases = 'https://github.com/isar/isar/releases/download/';
+const _releases = 'https://github.com/ahmtydn/isar_plus/releases/download/';
 
 Future<void> initTests() async {
   final lib = switch (Abi.current()) {

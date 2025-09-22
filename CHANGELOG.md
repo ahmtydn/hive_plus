@@ -1,14 +1,12 @@
 # 1.0.0
 
-⚠️ THIS VERSION OF HIVE PLUS IS UNSTABLE AND NOT READY FOR PRODUCTION USE ⚠️
-
-### Hive Plus Fork
+### Hive Plus Fork 
 
 This package is a maintained fork of the original Hive package. The original Hive package is no longer actively maintained, so this fork continues development and maintenance.
 
 Key changes in this fork:
 - Package renamed from `hive` to `hive_plus`
-- Updated repository and homepage links
+- Updated repository and homepage links  
 - Continued maintenance and bug fixes
 - Library name changed to `hive_plus`
 
@@ -25,11 +23,14 @@ Hive Plus now uses Isar internally which brings all the benefits of a native dat
 - Vastly reduced startup time
 - No more code generation
 
-# Original Hive Changelog
+# Original Hive Changelog (DEPRECATED)
 
-# 4.0.0-dev.0 (Original Hive)
+_All versions below are from the original Hive package and are deprecated. Use hive_plus instead._
+
+# _4.0.0-dev.0 (Original Hive - DEPRECATED)_
 
 ⚠️ THIS VERSION OF HIVE IS UNSTABLE AND NOT READY FOR PRODUCTION USE ⚠️
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 This is a complete rewrite of Hive. It is not compatible with older versions of Hive yet.
 
@@ -44,7 +45,9 @@ Hive now uses Isar internally which brings all the benefits of a native database
 - Vastly reduced startup time
 - No more code generation
 
-# 3.0.0-dev
+# _3.0.0-dev (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enchantments
 
@@ -53,33 +56,43 @@ Hive now uses Isar internally which brings all the benefits of a native database
 - Web Worker support
 - Threaded AesCipher support (requires hive_flutter >=2.0.0-dev)
 
-# 2.2.3
+# _2.2.3 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enhancements
 
 - Exposed `resetAdapters` method for testing - [#1014](https://github.com/hivedb/hive/pull/1014)
 - Removed unnecessary print statement - [#1015](https://github.com/hivedb/hive/pull/1015)
 
-# 2.2.2
+# _2.2.2 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Register DateTime adapter on web - [#983](https://github.com/hivedb/hive/pull/983)
 
-# 2.2.1
+# _2.2.1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Retracted hive@2.2.0 from pub.dev
 - Fixed hive web backend null value exception - [#968](https://github.com/hivedb/hive/pull/968)
 
-# 2.2.0
+# _2.2.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enhancements
 
 - Added multiple storage backends for web - [#956](https://github.com/hivedb/hive/pull/956)
 
-# 2.1.0
+# _2.1.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
@@ -90,13 +103,17 @@ Hive now uses Isar internally which brings all the benefits of a native database
 - Adapter type inheritance - [#927](https://github.com/hivedb/hive/pull/927)
 - UTF8 keys - [#928](https://github.com/hivedb/hive/pull/928)
 
-# 2.0.6
+# _2.0.6 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Fixed issue caused database to crash when executing crash recovery - [#914](https://github.com/hivedb/hive/pull/914)
 
-# 2.0.5
+# _2.0.5 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enhancements
 
@@ -108,25 +125,33 @@ Hive now uses Isar internally which brings all the benefits of a native database
 
 - Don't loose track of box objects if init crashes - [#846](https://github.com/hivedb/hive/pull/846)
 
-# 2.0.4
+# _2.0.4 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enhancements
 
 - Adds default value support to hive_generator generated class adapters
 
-# 2.0.3
+# _2.0.3 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Fix regression where lists are no longer growable - [#631](https://github.com/hivedb/hive/pull/631)
 
-# 2.0.2
+# _2.0.2 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - `HiveObjectMixin` not assigning box to object - [#618](https://github.com/hivedb/hive/issues/618)
 
-# 2.0.1
+# _2.0.1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
@@ -134,25 +159,33 @@ Hive now uses Isar internally which brings all the benefits of a native database
 - Allow calling `.init()` multiple times, instead of throwing error Hive will print warning to console
 - Hive will warn developers when registering adapters for `dynamic` type
 
-# 2.0.0
+# _2.0.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Stable null-safety version
 
-# 1.6.0-nullsafety.2
+# _1.6.0-nullsafety.2 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Added `defaultValue` property to `@HiveField()` annotation - [#557](https://github.com/hivedb/hive/pull/557)
 
-# 1.6.0-nullsafety.1
+# _1.6.0-nullsafety.1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Changed `meta` dependency version to `^1.3.0-nullsafety` to support null-safety
 
-# 1.6.0-nullsafety.0
+# _1.6.0-nullsafety.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Breaking changes
 
@@ -160,25 +193,33 @@ Hive now uses Isar internally which brings all the benefits of a native database
 - Update minimum Dart sdk constraint to 2.12.0-0.
 - In order to generate null-safe code use hive_generator >= 0.9.0-nullsafety.0
 
-# 1.5.0-pre
+# _1.5.0-pre (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enhancements
 
 - Timezone support for DateTime - [#419](https://github.com/hivedb/hive/issues/419)
 
-# 1.4.4+1
+# _1.4.4+1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Browser support for `BackendManager.boxExists(boxName, path)` - [#451](https://github.com/hivedb/hive/issues/451)
 
-# 1.4.4
+# _1.4.4 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Edge browser support - [#357](https://github.com/hivedb/hive/issues/357)
 
-# 1.4.3
+# _1.4.3 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enhancements
 
@@ -189,19 +230,25 @@ Hive now uses Isar internally which brings all the benefits of a native database
 - `open(Lazy)Box` can potentially open a box twice - [#345](https://github.com/hivedb/hive/issues/345)
 - Remove extra byte reservation in writeBoolLis - [#398](https://github.com/hivedb/hive/pull/398)
 
-# 1.4.2
+# _1.4.2 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Fixed dependency issues and minor improvements
 
-# 1.4.1+1
+# _1.4.1+1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Other
 
 - Added docs to all public members
 
-# 1.4.1
+# _1.4.1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enhancements
 
@@ -215,7 +262,9 @@ Hive now uses Isar internally which brings all the benefits of a native database
 
 - Fixed GitHub homepage path
 
-# 1.4.0+1
+# _1.4.0+1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enhancements
 
@@ -225,7 +274,9 @@ Hive now uses Isar internally which brings all the benefits of a native database
 
 - Allow more versions of `crypto`
 
-# 1.4.0
+# _1.4.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Enhancements
 
@@ -244,7 +295,9 @@ Hive now uses Isar internally which brings all the benefits of a native database
 - Dropped `pointycastle` dependency
 - Dropped `path` dependency
 
-# 1.3.0
+# _1.3.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 _Use latest version of `hive_generator`_
 
@@ -267,7 +320,9 @@ _Use latest version of `hive_generator`_
 
 - Not calling `Hive.init()` results in better exception
 
-# 1.2.0
+# _1.2.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Breaking changes
 
@@ -308,7 +363,9 @@ To avoid different behavior on case sensitive file systems, Hive should store fi
 If your box name contains upper case characters, the new version will not find a box stored by an older version. Please rename the hive file manually in that case.  
 This also applies to the web version.
 
-# 1.1.1
+# _1.1.1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Breaking changes
 
@@ -318,19 +375,25 @@ This also applies to the web version.
 
 - Fixed bug where `object.save()` would fail on subsequent calls
 
-# 1.1.0+2
+# _1.1.0+2 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Fixed bug that it was not possible to open typed boxes (`Box<E>`)
 
-# 1.1.0+1
+# _1.1.0+1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Fixes
 
 - Fixed bug that corrupted boxes were not detected
 
-# 1.1.0
+# _1.1.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 ### Breaking changes
 
@@ -357,16 +420,22 @@ This also applies to the web version.
 - Improved documentation
 - Preparation for queries
 
-# 1.0.0
+# _1.0.0 (Original Hive - DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - First stable release
 
-# 0.5.1+1
+# _0.5.1+1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Change `keys` parameter of `deleteAll` from `List` to `Iterable`
 - Fixed bug in `BinaryWriter`
 
-# 0.5.1
+# _0.5.1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Fixed `Hive.init()` bug in browser
 - Fixed a bug with large lists or strings
@@ -375,7 +444,9 @@ This also applies to the web version.
 - Improved docs
 - Added integration tests
 
-# 0.5.0
+# _0.5.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Added `keyComparator` parameter for custom key order
 - Added `isEmpty` and `isNotEmpty` getters to box
@@ -389,16 +460,22 @@ This also applies to the web version.
 - Fixed writing longer Strings
 - **Breaking:** Binary format changed
 
-# 0.4.1+1
+# _0.4.1+1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Document all public APIs
 - Fixed flutter_web error
 
-# 0.4.1
+# _0.4.1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Allow different versions of the `path` package
 
-# 0.4.0
+# _0.4.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Added `BigInt` support
 - Added `compactionStrategy` parameter
@@ -415,11 +492,15 @@ This also applies to the web version.
 - **Breaking:** Binary format changed
 - **Breaking:** API changes
 
-# 0.3.0+1
+# _0.3.0+1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Bugfix: `Hive['yourBox']` didn't work with uppercase box names
 
-# 0.3.0
+# _0.3.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Big step towards stable API
 - Support for transactions
@@ -429,7 +510,9 @@ This also applies to the web version.
 - **Breaking:** `inMemory` -> `lazy`
 - **Breaking:** Binary format changed
 
-# 0.2.0
+# _0.2.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Support for dart2js
 - Improved performance
@@ -438,10 +521,14 @@ This also applies to the web version.
 - **Breaking:** Changed Endianness to little
 - **Breaking:** Removed Migrator
 
-# 0.1.1
+# _0.1.1 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - Downgrade to `meta: ^1.1.6` to support flutter
 
-# 0.1.0
+# _0.1.0 (DEPRECATED)_
+
+⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - First release
