@@ -41,6 +41,10 @@ void main() {
       final events = <WatchEvent<int, String>>[];
       final subscription = box.watch<int>(key: 0).listen(events.add);
 
+      // First add an item at index 0
+      box.add('initial');
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+
       // Update at index 0
       box[0] = 'updated';
       await Future<void>.delayed(const Duration(milliseconds: 100));
