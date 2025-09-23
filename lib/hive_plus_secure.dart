@@ -1,4 +1,5 @@
-/// Hive Plus is a lightweight and blazing fast key-value store made for\n/// Flutter and Dart. It is strongly encrypted using AES-256.
+/// Hive Plus is a lightweight and blazing fast key-value store made
+/// for Flutter and Dart. It is strongly encrypted using AES-256.
 library hive_plus_secure;
 
 import 'dart:async';
