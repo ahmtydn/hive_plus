@@ -356,7 +356,52 @@ class _BoxImpl<E> implements Box<E> {
   }
 
   @override
-  Stream<(Object, E?)> watch({Object? key}) {
-    throw UnimplementedError();
+  Stream<WatchEvent<K, E>> watch<K extends Object>({K? key}) {
+    if (key != null) {
+      // Watch for changes to a specific key
+      if (key is String) {
+        // Watch for changes to a String key in the Frame collection
+        return collection
+            .watchLazy()
+            .asyncMap<WatchEvent<K, E>?>((event) {
+              final frame = collection.where().keyEqualTo(key).findFirst();
+              if (frame != null) {
+                final value = _frameFromJson(frame);
+                return WatchEvent<K, E>(key as K, value);
+              } else {
+                // Key has been deleted
+                return WatchEvent<K, E>(key as K, null);
+              }
+            })
+            .where((event) => event != null)
+            .cast<WatchEvent<K, E>>();
+      } else if (key is int) {
+        // Watch for changes to an integer key (index)
+        return collection
+            .watchLazy()
+            .asyncMap<WatchEvent<K, E>?>((event) {
+              try {
+                final value = getAt(key);
+                return WatchEvent<K, E>(key as K, value);
+              } catch (e) {
+                // Index no longer exists
+                return WatchEvent<K, E>(key as K, null);
+              }
+            })
+            .where((event) => event != null)
+            .cast<WatchEvent<K, E>>();
+      }
+    }
+
+    // General watch (listen to all changes)
+    return collection
+        .watchLazy()
+        .asyncMap<WatchEvent<K, E>?>((event) {
+          // General change event - difficult to determine which key changed
+          // Return a special marker key in this case
+          return WatchEvent<K, E>('__change__' as K, null);
+        })
+        .where((event) => event != null)
+        .cast<WatchEvent<K, E>>();
   }
 }

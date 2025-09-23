@@ -1,3 +1,25 @@
+# 1.1.0
+
+### Features
+
+- **Enhanced Watch API**: Implemented generic `watch()` method with type-safe key parameters
+  - Added `WatchEvent<K, E>` class for better API ergonomics with `.key` and `.value` properties
+  - Support for both String and int key types with proper generic constraints
+  - Replaced tuple return type `(K, E?)` with user-friendly `WatchEvent<K, E>`
+  - Example usage:
+    ```dart
+    box.watch<String>(key: 'myKey').listen((event) {
+      String key = event.key;     // Type-safe key access
+      String? value = event.value; // Type-safe value access
+      print('Key: $key, Value: $value');
+    });
+    ```
+
+### Breaking Changes
+
+- `Box.watch()` method now returns `Stream<WatchEvent<K, E>>` instead of `Stream<(K, E?)>`
+- Users should update their watch handlers to use `.key` and `.value` properties
+
 # 1.0.0
 
 ### Hive Plus Fork 
