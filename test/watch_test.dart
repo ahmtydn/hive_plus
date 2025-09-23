@@ -88,15 +88,7 @@ void main() {
     test('demonstrates WatchEvent API usage', () async {
       final box = await openTestBox<String>();
       final events = <WatchEvent<String, String>>[];
-      final subscription = box.watch<String>(key: 'demo').listen((event) {
-        events.add(event);
-
-        // Now users can access properties naturally:
-        final key = event.key; // Type-safe key access
-        final value = event.value; // Type-safe value access
-
-        print('Key: $key, Value: $value');
-      });
+      final subscription = box.watch<String>(key: 'demo').listen(events.add);
 
       box.put('demo', 'example');
       await Future<void>.delayed(const Duration(milliseconds: 100));

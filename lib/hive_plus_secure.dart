@@ -5,6 +5,7 @@ import 'dart:async';
 
 import 'package:hive_plus_secure/src/impl/frame.dart';
 import 'package:isar_plus/isar_plus.dart';
+import 'package:meta/meta.dart';
 
 part 'src/box.dart';
 part 'src/hive.dart';

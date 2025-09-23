@@ -3,6 +3,7 @@ part of hive_plus_secure;
 /// Represents a change event from watching a box.
 ///
 /// Contains the [key] that changed and the new [value] (or null if deleted).
+@immutable
 class WatchEvent<K, E> {
   /// Creates a new watch event.
   const WatchEvent(this.key, this.value);
