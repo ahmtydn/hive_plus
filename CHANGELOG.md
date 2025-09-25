@@ -1,3 +1,12 @@
+# 1.1.6
+### Features
+- **Enhanced Watch API**: Added optional `documentParser` parameter to `watchDetailed<T>()` method for custom document parsing
+  - Allows users to provide custom parsing logic for better type safety and flexibility
+  - Method signature: `watchDetailed<T>({T Function(Map<String, dynamic>)? documentParser})`
+
+### Improvements
+- Updated dependency `isar_plus` to version `^1.0.14` for enhanced functionality and stability
+
 # 1.1.5
 ### Improvements
 - exported `DocumentSerializable` from `isar_plus` package for better type constraints in `watchDetailed<T>()` method

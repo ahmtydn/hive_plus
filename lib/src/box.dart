@@ -212,5 +212,7 @@ abstract interface class Box<E> {
   ///
   /// @throws UnsupportedError if called on web platforms
   /// @returns A stream of [ChangeDetail] objects representing database changes
-  Stream<ChangeDetail<T>> watchDetailed<T extends DocumentSerializable>();
+  Stream<ChangeDetail<T>> watchDetailed<T extends DocumentSerializable>({
+    T Function(Map<String, dynamic>)? documentParser,
+  });
 }

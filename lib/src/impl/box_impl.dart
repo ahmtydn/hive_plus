@@ -368,7 +368,9 @@ class _BoxImpl<E> implements Box<E> {
   }
 
   @override
-  Stream<ChangeDetail<T>> watchDetailed<T extends DocumentSerializable>() {
-    return collection.watchDetailed<T>();
+  Stream<ChangeDetail<T>> watchDetailed<T extends DocumentSerializable>({
+    T Function(Map<String, dynamic>)? documentParser,
+  }) {
+    return collection.watchDetailed<T>(documentParser: documentParser);
   }
 }
