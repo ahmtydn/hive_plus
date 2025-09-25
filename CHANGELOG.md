@@ -1,3 +1,17 @@
+# 1.1.4
+### Features
+- **Enhanced Type Safety**: Added generic type parameter support to `watchDetailed<T>()` method for improved type safety
+- **Export Enhancement**: Added export for `ChangeDetail` class from `isar_plus` package for better API access
+- **Improved Documentation**: Comprehensive documentation updates for `watchDetailed()` method including:
+  - Detailed usage examples with type-safe document parsing
+  - Platform support information (web platform limitations)
+  - Performance considerations and best practices
+  - Clear explanation of change types and thread safety
+
+### Breaking Changes
+- `Box.watchDetailed()` method now requires a generic type parameter `T extends DocumentSerializable`
+- Method signature changed from `Stream<ChangeDetail> watchDetailed()` to `Stream<ChangeDetail<T>> watchDetailed<T extends DocumentSerializable>()`
+
 # 1.1.3
 ### Improvements
 - Updated dependency `isar_plus` to version `^1.0.13`
