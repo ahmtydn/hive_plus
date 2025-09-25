@@ -1,34 +1,5 @@
 part of hive_plus_secure;
 
-/// Represents a change event from watching a box.
-///
-/// Contains the [key] that changed and the new [value] (or null if deleted).
-@immutable
-class WatchEvent<K, E> {
-  /// Creates a new watch event.
-  const WatchEvent(this.key, this.value);
-
-  /// The key that changed.
-  final K key;
-
-  /// The new value, or null if the key was deleted.
-  final E? value;
-
-  @override
-  String toString() => 'WatchEvent(key: $key, value: $value)';
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is WatchEvent<K, E> &&
-          runtimeType == other.runtimeType &&
-          key == other.key &&
-          value == other.value;
-
-  @override
-  int get hashCode => key.hashCode ^ value.hashCode;
-}
-
 /// A box contains and manages a collection of key-value pairs.
 abstract interface class Box<E> {
   /// Whether this box is currently open.
@@ -172,5 +143,24 @@ abstract interface class Box<E> {
   ///   print('Key: ${event.key}, Value: ${event.value}');
   /// });
   /// ```
-  Stream<WatchEvent<K, E>> watch<K extends Object>({K? key});
+  Stream<void> watch<K extends Object>({K? key});
+
+  /// Returns a stream of detailed change events for this box.
+  ///
+  /// This method provides MongoDB-like change stream functionality,
+  /// emitting detailed information about what changed, including
+  /// field-level changes with old and new values.
+  ///
+  /// Example:
+  /// ```dart
+  /// box.watchDetailed().listen((changeDetail) {
+  ///   print('Change: ${changeDetail.changeType}');
+  ///   print('Key: ${changeDetail.key}');
+  ///   for (final fieldChange in changeDetail.fieldChanges) {
+  ///     print('Field ${fieldChange.fieldName}:
+  ///       ${fieldChange.oldValue} → ${fieldChange.newValue}');
+  ///   }
+  /// });
+  /// ```
+  Stream<HiveChangeDetail> watchDetailed();
 }

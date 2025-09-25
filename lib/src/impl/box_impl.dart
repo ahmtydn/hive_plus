@@ -356,52 +356,50 @@ class _BoxImpl<E> implements Box<E> {
   }
 
   @override
-  Stream<WatchEvent<K, E>> watch<K extends Object>({K? key}) {
+  Stream<void> watch<K extends Object>({K? key}) {
     if (key != null) {
-      // Watch for changes to a specific key
-      if (key is String) {
-        // Watch for changes to a String key in the Frame collection
-        return collection
-            .watchLazy()
-            .asyncMap<WatchEvent<K, E>?>((event) {
-              final frame = collection.where().keyEqualTo(key).findFirst();
-              if (frame != null) {
-                final value = _frameFromJson(frame);
-                return WatchEvent<K, E>(key as K, value);
-              } else {
-                // Key has been deleted
-                return WatchEvent<K, E>(key as K, null);
-              }
-            })
-            .where((event) => event != null)
-            .cast<WatchEvent<K, E>>();
-      } else if (key is int) {
+      if (key is int) {
         // Watch for changes to an integer key (index)
-        return collection
-            .watchLazy()
-            .asyncMap<WatchEvent<K, E>?>((event) {
-              try {
-                final value = getAt(key);
-                return WatchEvent<K, E>(key as K, value);
-              } catch (e) {
-                // Index no longer exists
-                return WatchEvent<K, E>(key as K, null);
-              }
-            })
-            .where((event) => event != null)
-            .cast<WatchEvent<K, E>>();
+        return collection.watchObject(key);
       }
     }
 
-    // General watch (listen to all changes)
-    return collection
-        .watchLazy()
-        .asyncMap<WatchEvent<K, E>?>((event) {
-          // General change event - difficult to determine which key changed
-          // Return a special marker key in this case
-          return WatchEvent<K, E>('__change__' as K, null);
-        })
-        .where((event) => event != null)
-        .cast<WatchEvent<K, E>>();
+    return collection.watchLazy();
+  }
+
+  @override
+  Stream<HiveChangeDetail> watchDetailed() {
+    return collection.watchDetailed().map((changeDetail) {
+      // Convert Isar ChangeDetail to Hive ChangeDetail
+      final hiveChangeType = _convertChangeType(changeDetail.changeType);
+      final hiveFieldChanges = changeDetail.fieldChanges
+          .map(
+            (fc) => HiveFieldChange(
+              fieldName: fc.fieldName,
+              oldValue: fc.oldValue,
+              newValue: fc.newValue,
+            ),
+          )
+          .toList();
+
+      return HiveChangeDetail(
+        changeType: hiveChangeType,
+        boxName: name,
+        key: changeDetail.objectId.toString(),
+        fieldChanges: hiveFieldChanges,
+        timestamp: DateTime.now(),
+      );
+    });
+  }
+
+  HiveChangeType _convertChangeType(ChangeType isarChangeType) {
+    switch (isarChangeType) {
+      case ChangeType.insert:
+        return HiveChangeType.insert;
+      case ChangeType.update:
+        return HiveChangeType.update;
+      case ChangeType.delete:
+        return HiveChangeType.delete;
+    }
   }
 }

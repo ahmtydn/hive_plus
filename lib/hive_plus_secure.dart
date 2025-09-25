@@ -12,3 +12,4 @@ part 'src/box.dart';
 part 'src/hive.dart';
 part 'src/impl/box_impl.dart';
 part 'src/impl/type_registry.dart';
+part 'src/watcher_details.dart';
