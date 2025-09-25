@@ -1,3 +1,7 @@
+# 1.1.10
+### Improvements
+- Updated dependency `isar_plus` to version `^1.0.18` for improved stability and performance.
+
 # 1.1.9
 ### Improvements
 - Updated dependency `isar_plus` to version `^1.0.17` for improved stability and performance.
