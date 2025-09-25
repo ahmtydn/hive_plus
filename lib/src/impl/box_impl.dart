@@ -368,38 +368,7 @@ class _BoxImpl<E> implements Box<E> {
   }
 
   @override
-  Stream<HiveChangeDetail> watchDetailed() {
-    return collection.watchDetailed().map((changeDetail) {
-      // Convert Isar ChangeDetail to Hive ChangeDetail
-      final hiveChangeType = _convertChangeType(changeDetail.changeType);
-      final hiveFieldChanges = changeDetail.fieldChanges
-          .map(
-            (fc) => HiveFieldChange(
-              fieldName: fc.fieldName,
-              oldValue: fc.oldValue,
-              newValue: fc.newValue,
-            ),
-          )
-          .toList();
-
-      return HiveChangeDetail(
-        changeType: hiveChangeType,
-        boxName: name,
-        key: changeDetail.objectId.toString(),
-        fieldChanges: hiveFieldChanges,
-        timestamp: DateTime.now(),
-      );
-    });
-  }
-
-  HiveChangeType _convertChangeType(ChangeType isarChangeType) {
-    switch (isarChangeType) {
-      case ChangeType.insert:
-        return HiveChangeType.insert;
-      case ChangeType.update:
-        return HiveChangeType.update;
-      case ChangeType.delete:
-        return HiveChangeType.delete;
-    }
+  Stream<ChangeDetail> watchDetailed() {
+    return collection.watchDetailed();
   }
 }

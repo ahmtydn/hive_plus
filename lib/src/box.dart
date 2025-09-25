@@ -158,5 +158,5 @@ abstract interface class Box<E> {
   ///   }
   /// });
   /// ```
-  Stream<HiveChangeDetail> watchDetailed();
+  Stream<ChangeDetail> watchDetailed();
 }
