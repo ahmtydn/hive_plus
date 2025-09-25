@@ -1,3 +1,7 @@
+# 1.1.7
+### Improvements
+- Updated dependency `isar_plus` to version `^1.0.15` for improved stability and performance.
+
 # 1.1.6
 ### Features
 - **Enhanced Watch API**: Added optional `documentParser` parameter to `watchDetailed<T>()` method for custom document parsing
