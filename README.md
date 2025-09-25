@@ -4,11 +4,11 @@
 <h2 align="center">Hive Plus - Fast, Enjoyable & Secure NoSQL Database</h2>
 
 <p align="center">
-  <a href="https://pub.dev/packages/hive_plus">
-    <img src="https://img.shields.io/pub/v/hive_plus?label=pub.dev&labelColor=333940&logo=dart">
+  <a href="https://pub.dev/packages/hive_plus_secure">
+    <img src="https://img.shields.io/pub/v/hive_plus_secure?label=pub.dev&labelColor=333940&logo=dart">
   </a>
-  <a href="https://github.com/ahmtydn/hive_plus/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/ahmtydn/hive_plus/test.yml?branch=main&label=tests&labelColor=333940&logo=github">
+  <a href="https://github.com/ahmtydn/hive_plus_secure/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/ahmtydn/hive_plus_secure/test.yml?branch=main&label=tests&labelColor=333940&logo=github">
   </a>
 </p>
 
@@ -31,12 +31,12 @@ Feeling the excitement? Great! Let's help you take your first flight with Hive.
 
 #### 🔗 Add dependencies
 
-To kickstart the journey add `hive_plus`, `isar_flutter_libs` and `path_provider` to your `pubspec.yaml`.
+To kickstart the journey add `hive_plus_secure`, `isar_flutter_libs` and `path_provider` to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
-  hive_plus: ^latest_version
-  isar_flutter_libs: ^latest_version
+  hive_plus_secure: ^latest_version
+  isar_plus_flutter_libs: ^latest_version
   path_provider: ^2.1.0
 ```
 
