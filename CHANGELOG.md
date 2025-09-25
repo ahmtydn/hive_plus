@@ -1,3 +1,7 @@
+# 1.1.5
+### Improvements
+- exported `DocumentSerializable` from `isar_plus` package for better type constraints in `watchDetailed<T>()` method
+
 # 1.1.4
 ### Features
 - **Enhanced Type Safety**: Added generic type parameter support to `watchDetailed<T>()` method for improved type safety

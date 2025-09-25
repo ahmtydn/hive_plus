@@ -7,7 +7,8 @@ import 'dart:async';
 import 'package:hive_plus_secure/src/impl/frame.dart';
 import 'package:isar_plus/isar_plus.dart';
 
-export 'package:isar_plus/isar_plus.dart' show ChangeDetail;
+export 'package:isar_plus/isar_plus.dart'
+    show ChangeDetail, DocumentSerializable;
 
 part 'src/box.dart';
 part 'src/hive.dart';
