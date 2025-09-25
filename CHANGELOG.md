@@ -1,3 +1,7 @@
+# 1.1.12
+### Improvements
+- Updated dependency `isar_plus` to version `^1.0.19` for improved stability and performance.
+
 # 1.1.11
 ### Improvements
 - **Enhanced Export API**: Added export for `ChangeType` enum from `isar_plus` package for better API access and type safety when working with change details
