@@ -131,10 +131,6 @@ abstract interface class Box<E> {
   /// If the [key] parameter is provided, only events for the specified key are
   /// broadcasted.
   ///
-  /// The stream emits a [WatchEvent] containing the key and
-  /// the new value (or null if deleted).
-  /// The key can be either a [String] or an [int].
-  ///
   /// Type parameter [K] must be either [String] or [int].
   ///
   /// Example:

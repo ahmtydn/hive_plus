@@ -1,3 +1,11 @@
+# 1.1.1
+
+### Improvements
+
+- **Watcher Functionality**: Added `WatcherDetails` class for improved watcher management
+- **Box Implementation**: Enhanced box implementation with better watcher support
+- **Code Organization**: Improved internal structure and removed obsolete test files
+
 # 1.1.0
 
 ### Features
