@@ -170,8 +170,11 @@ class _BoxImpl<E> implements Box<E> {
   @override
   void put(String key, E value) {
     write(() {
+      final existingFrame = collection.where().keyEqualTo(key).findFirst();
+      final id = existingFrame?.id ?? collection.autoIncrement();
+
       final frame = Frame(
-        id: collection.autoIncrement(),
+        id: id,
         typeId: Hive._typeRegistry.findTypeId(value),
         key: key,
         value: value,

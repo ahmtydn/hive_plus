@@ -1,3 +1,11 @@
+# 1.1.14
+### Bug Fixes
+- **Fixed ID Assignment**: Fixed `put()` method to reuse existing frame ID when updating a value instead of always creating a new auto-incremented ID
+  - This resolves potential memory leaks and ensures proper key-value updates
+
+### Improvements
+- Updated dependency `isar_plus` to version `^1.0.21` for improved stability and performance
+
 # 1.1.13
 ### Improvements
 - Updated dependency `isar_plus` to version `^1.0.20` for improved stability and performance.
