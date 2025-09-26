@@ -47,7 +47,7 @@ void main() {
         box.put('key1', 'hello');
         box.put('key2', 'world');
         box.put('key1', 'hello2');
-        expect(box.keys, ['key2', 'key1']);
+        expect(box.keys, ['key1', 'key2']);
       });
 
       test('contains no int keys', () async {
@@ -85,8 +85,8 @@ void main() {
         box.put('key2', 'hello');
         box.put('key1', 'world');
         box.put('key2', 'hello2');
-        expect(box.keyAt(0), 'key1');
-        expect(box.keyAt(1), 'key2');
+        expect(box.keyAt(0), 'key2');
+        expect(box.keyAt(1), 'key1');
       });
     });
 
@@ -244,8 +244,8 @@ void main() {
         box.put('key2', 'world');
         box.put('key3', '!');
         box.put('key2', 'world2');
-        expect(box.getAt(2), 'world2');
-        expect(box.keys, ['key1', 'key3', 'key2']);
+        expect(box.getAt(1), 'world2');
+        expect(box.keys, ['key1', 'key2', 'key3']);
       });
 
       test('adds new entry if it does not exist', () async {
@@ -288,8 +288,8 @@ void main() {
         box['key2'] = 'world';
         box['key3'] = '!';
         box['key2'] = 'world2';
-        expect(box.getAt(2), 'world2');
-        expect(box.keys, ['key1', 'key3', 'key2']);
+        expect(box.getAt(1), 'world2');
+        expect(box.keys, ['key1', 'key2', 'key3']);
       });
 
       test('adds new entry if String key does not exist', () async {
