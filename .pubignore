@@ -1,0 +1,3 @@
+# Exclude example directory from published package
+# The example is a Flutter app and not needed in the published package
+example/
