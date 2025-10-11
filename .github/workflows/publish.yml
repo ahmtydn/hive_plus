@@ -16,25 +16,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
         with:
-          flutter-version: '3.35.1'
+          sdk: stable
           
       - name: Install dependencies
-        run: flutter pub get
+        run: dart pub get
         
       - name: Verify package
-        run: flutter pub publish --dry-run
+        run: dart pub publish --dry-run
         
       - name: Run tests
-        run: flutter test
+        run: dart test
         
       - name: Check formatting
         run: dart format -o none . --set-exit-if-changed
         
       - name: Analyze code
-        run: flutter analyze --fatal-infos
+        run: dart analyze --fatal-infos
         
       - name: pub.dev credentials
         run: |
@@ -42,4 +42,4 @@ jobs:
           echo '${{ secrets.PUB_JSON }}' >> $HOME/.config/dart/pub-credentials.json
           
       - name: Publish to pub.dev
-        run: flutter pub publish --force
+        run: dart pub publish --force
