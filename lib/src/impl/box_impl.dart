@@ -80,6 +80,11 @@ class _BoxImpl<E> implements Box<E> {
     return Hive._typeRegistry.fromJson(frame.typeId, frame.value);
   }
 
+  dynamic _valueToJson(E value) {
+    final json = Hive._typeRegistry.toJson(value);
+    return json ?? value;
+  }
+
   @override
   bool containsKey(String key) {
     return !collection.where().keyEqualTo(key).isEmpty();
@@ -177,7 +182,7 @@ class _BoxImpl<E> implements Box<E> {
         id: id,
         typeId: Hive._typeRegistry.findTypeId(value),
         key: key,
-        value: value,
+        value: _valueToJson(value),
       );
       collection.put(frame);
     });
@@ -195,7 +200,7 @@ class _BoxImpl<E> implements Box<E> {
       final frame = Frame(
         id: idAtIndex,
         typeId: Hive._typeRegistry.findTypeId(value),
-        value: value,
+        value: _valueToJson(value),
       );
       collection.put(frame);
     });
@@ -223,7 +228,7 @@ class _BoxImpl<E> implements Box<E> {
           id: collection.autoIncrement(),
           typeId: Hive._typeRegistry.findTypeId(entry.value),
           key: entry.key,
-          value: entry.value,
+          value: _valueToJson(entry.value),
         );
         frames.add(frame);
       }
@@ -257,7 +262,7 @@ class _BoxImpl<E> implements Box<E> {
         final frame = Frame(
           id: idsInRange[frames.length],
           typeId: Hive._typeRegistry.findTypeId(value),
-          value: value,
+          value: _valueToJson(value),
         );
         frames.add(frame);
       }
@@ -272,7 +277,7 @@ class _BoxImpl<E> implements Box<E> {
         id: collection.autoIncrement(),
         typeId: Hive._typeRegistry.findTypeId(value),
         key: key,
-        value: value,
+        value: _valueToJson(value),
       );
       collection.put(frame);
     });
@@ -286,7 +291,7 @@ class _BoxImpl<E> implements Box<E> {
         final frame = Frame(
           id: collection.autoIncrement(),
           typeId: Hive._typeRegistry.findTypeId(value),
-          value: value,
+          value: _valueToJson(value),
         );
         frames.add(frame);
       }

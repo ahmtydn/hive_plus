@@ -15,13 +15,14 @@ class _TypeRegistry {
   void register<T>(
     int typeId,
     T? Function(dynamic json) fromJson,
-    Type? type,
-  ) {
+    Type? type, [
+    Map<String, dynamic>? Function(T value)? toJson,
+  ]) {
     if (T == dynamic) {
       throw ArgumentError('Cannot register dynamic type.');
     }
 
-    final handler = _TypeHandler<T>(typeId, fromJson);
+    final handler = _TypeHandler<T>(typeId, fromJson, toJson);
     _registry[typeId] = handler;
     _reverseRegistry[type ?? T] = handler;
   }
@@ -69,6 +70,23 @@ class _TypeRegistry {
     return null;
   }
 
+  Map<String, dynamic>? toJson(dynamic value) {
+    final handler = _reverseRegistry[value.runtimeType];
+    if (handler?.toJson != null) {
+      return handler!.toJson!(value);
+    }
+
+    for (final MapEntry(key: type, value: handler)
+        in _reverseRegistry.entries) {
+      if (handler.handlesValue(value) && handler.toJson != null) {
+        _reverseRegistry[type] = handler;
+        return handler.toJson!(value);
+      }
+    }
+
+    return null;
+  }
+
   void reset() {
     _registry.clear();
     _reverseRegistry.clear();
@@ -81,15 +99,22 @@ T? _noop<T>(Map<String, dynamic> json) {
 }
 
 class _TypeHandler<T> {
-  const _TypeHandler(this.typeId, this.fromJson);
+  const _TypeHandler(
+    this.typeId,
+    this.fromJson, [
+    this.toJson,
+  ]);
 
   const _TypeHandler.builtin()
       : typeId = null,
-        fromJson = _noop;
+        fromJson = _noop,
+        toJson = null;
 
   final int? typeId;
 
   final T? Function(Map<String, dynamic> json) fromJson;
+
+  final Map<String, dynamic>? Function(T value)? toJson;
 
   bool handlesValue(dynamic value) {
     return value is T;

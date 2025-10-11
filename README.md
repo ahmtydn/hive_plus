@@ -285,7 +285,7 @@ class Bee {
 Before our bee-friends can buzz around in Hive, you need to do the beekeeper's job and register the `Bee` class:
 
 ```dart
-Hive.registerAdapter('Bee', Bee.fromJson);
+Hive.registerAdapter('Bee', Bee.fromJson, Bee);
 ```
 
 Now, you're all set to let your bees fly:
@@ -297,7 +297,6 @@ final bumble = Bee(name: 'Bumble', role: 'Worker');
 box.put('BumbleID', bumble);
 
 print(box.get('BumbleID')); // Bumble - Worker
-```
 
 > Bee fact: Bees are responsible for pollinating about one-third of the world's food crops.
 

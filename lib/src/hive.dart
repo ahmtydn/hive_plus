@@ -33,14 +33,25 @@ class Hive {
   ///   }
   /// }
   ///
-  /// Hive.registerAdapter('Person', Person.fromJson);
+  /// Hive.registerAdapter('Person', Person.fromJson, Person);
+  /// ```
+  ///
+  /// For types that require a custom serializer:
+  /// ```dart
+  /// Hive.registerAdapter(
+  ///   'SyncOperation',
+  ///   (json) => SyncOperation.fromJson(json, Birthday.fromJson),
+  ///   SyncOperation,
+  ///   (value) => value.toJson((item) => item.toJson()),
+  /// );
   /// ```
   static void registerAdapter<T>(
     String typeName,
     T? Function(dynamic json) fromJson,
-    Type? type,
-  ) {
-    _typeRegistry.register<T>(Isar.fastHash(typeName), fromJson, type);
+    Type? type, [
+    Map<String, dynamic>? Function(T value)? toJson,
+  ]) {
+    _typeRegistry.register<T>(Isar.fastHash(typeName), fromJson, type, toJson);
   }
 
   /// Get or open the box with [name] in the given [directory]. If no directory

@@ -1,3 +1,15 @@
+# 1.1.15
+### Features
+- **Custom Serialization Support**: Added support for custom `toJson` serializers in `registerAdapter()`
+  - Allows registration of types with custom serialization logic (e.g., generic classes with type parameters)
+  - New signature: `registerAdapter<T>(String typeName, T? Function(dynamic json) fromJson, Type? type, [Map<String, dynamic>? Function(T value)? toJson])`
+  - Enables proper serialization of complex types like `SyncOperation<T>` that require serializer callbacks
+  - Backward compatible - `toJson` parameter is optional
+
+### Bug Fixes
+- Fixed JSON encoding errors for types with parameterized `toJson()` methods
+- Resolved "Converting object to an encodable object failed" errors when storing generic types
+
 # 1.1.14
 ### Bug Fixes
 - **Fixed ID Assignment**: Fixed `put()` method to reuse existing frame ID when updating a value instead of always creating a new auto-incremented ID
