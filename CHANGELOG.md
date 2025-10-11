@@ -1,3 +1,11 @@
+# 1.1.16
+### Bug Fixes
+- **Fixed Type Casting Issue**: Resolved type mismatch error when using custom `toJson` serializers with generic types
+  - Fixed `type '(T) => Map<String, dynamic>' is not a subtype of type '((dynamic) => Map<String, dynamic>?)?'` error
+  - Modified `_TypeHandler` to accept `dynamic` parameter in `toJson` function signature
+  - Added proper type casting wrapper in `register()` method to ensure type safety at runtime
+- **Fixed Type Inference**: Added explicit type argument to `_noop` function in `_TypeHandler.builtin()` constructor
+
 # 1.1.15
 ### Features
 - **Custom Serialization Support**: Added support for custom `toJson` serializers in `registerAdapter()`
