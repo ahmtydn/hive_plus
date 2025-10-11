@@ -21,22 +21,17 @@ jobs:
         with:
           sdk: stable
       
-      - name: Rename example temporarily
-        run: mv example example_tmp || true
+      - name: Remove example directory
+        run: rm -rf example
           
       - name: Install dependencies
         run: dart pub get
-        working-directory: .
         
       - name: Verify package
         run: dart pub publish --dry-run
         
       - name: Run tests
         run: dart test
-        working-directory: .
-      
-      - name: Restore example
-        run: mv example_tmp example || true
         
       - name: Check formatting
         run: dart format -o none . --set-exit-if-changed
