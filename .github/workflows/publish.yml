@@ -20,6 +20,9 @@ jobs:
         uses: dart-lang/setup-dart@v1
         with:
           sdk: stable
+      
+      - name: Remove example directory
+        run: rm -rf example
           
       - name: Install dependencies
         run: dart pub get
