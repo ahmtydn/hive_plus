@@ -1,3 +1,10 @@
+# 1.1.17
+### Features
+- **Inspector Parameter**: Added `inspector` boolean parameter to `Hive.box()` method
+  - Allows enabling/disabling the Isar Inspector for debugging purposes
+  - Defaults to `true` for backward compatibility
+  - Usage: `Hive.box<T>(inspector: false)` to disable inspector
+
 # 1.1.16
 ### Bug Fixes
 - **Fixed Type Casting Issue**: Resolved type mismatch error when using custom `toJson` serializers with generic types
