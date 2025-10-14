@@ -1,3 +1,7 @@
+# 1.1.18
+### Improvements
+- Updated dependency `isar_plus` to version `^1.0.27` for improved stability and performance.
+
 # 1.1.17
 ### Features
 - **Inspector Parameter**: Added `inspector` boolean parameter to `Hive.box()` method
