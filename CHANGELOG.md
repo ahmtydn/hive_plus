@@ -1,3 +1,9 @@
+# 1.1.19
+### Improvements
+- **Enhanced Error Handling**: Added `EncryptionError` to the exported API for better error handling and debugging
+  - Now exports `EncryptionError` from `isar_plus` package for improved encryption error handling
+  - Provides developers with more granular control over encryption-related exceptions
+
 # 1.1.18
 ### Improvements
 - Updated dependency `isar_plus` to version `^1.0.27` for improved stability and performance.
