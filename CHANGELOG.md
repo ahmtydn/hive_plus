@@ -1,3 +1,14 @@
+# 1.1.20
+### Features
+- **Drop Database**: Added `dropDatabase()` static method to `Hive` class
+  - Allows dropping a database without opening it first
+  - Useful for corrupted or encrypted databases that cannot be opened with the current encryption key
+  - Parameters: `name` (required), `directory` (required), `encryptionKey` (optional)
+  - Automatically removes the database from open boxes if it was previously open
+
+### Improvements
+- Updated dependency `isar_plus` to version `^1.0.28` for improved stability and performance
+
 # 1.1.19
 ### Improvements
 - **Enhanced Error Handling**: Added `EncryptionError` to the exported API for better error handling and debugging

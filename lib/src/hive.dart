@@ -122,4 +122,30 @@ class Hive {
       box.deleteFromDisk();
     }
   }
+
+  /// Drop a database without opening it first.
+  ///
+  /// This is useful when you need to drop a corrupted or encrypted database
+  /// that cannot be opened with the current encryption key.
+  ///
+  /// [name] is the name of the database to drop.
+  ///
+  /// [directory] is the directory where the database files are stored.
+  ///
+  /// [encryptionKey] determines the storage engine used
+  /// (SQLite if provided, Isar if null).
+  static void dropDatabase({
+    required String name,
+    required String directory,
+    String? encryptionKey,
+  }) {
+    Isar.deleteDatabase(
+      name: name,
+      directory: directory,
+      engine: encryptionKey != null ? IsarEngine.sqlite : IsarEngine.isar,
+    );
+
+    // Remove from open boxes if it was open
+    _openBoxes.remove(name);
+  }
 }
