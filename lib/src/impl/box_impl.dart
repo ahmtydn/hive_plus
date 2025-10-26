@@ -172,11 +172,13 @@ class _BoxImpl<E> implements Box<E> {
     write(() {
       final existingId =
           collection.where().keyEqualTo(key).idProperty().findFirst();
+      final typeId = Hive._typeRegistry.findTypeId(value);
+      final serializedValue = Hive._typeRegistry.toJson(value);
       final frame = Frame(
         id: existingId ?? collection.autoIncrement(),
-        typeId: Hive._typeRegistry.findTypeId(value),
+        typeId: typeId,
         key: key,
-        value: value,
+        value: serializedValue,
       );
       collection.put(frame);
     });
@@ -191,10 +193,12 @@ class _BoxImpl<E> implements Box<E> {
         throw IndexError.withLength(index, length);
       }
 
+      final typeId = Hive._typeRegistry.findTypeId(value);
+      final serializedValue = Hive._typeRegistry.toJson(value);
       final frame = Frame(
         id: idAtIndex,
-        typeId: Hive._typeRegistry.findTypeId(value),
-        value: value,
+        typeId: typeId,
+        value: serializedValue,
       );
       collection.put(frame);
     });
@@ -218,11 +222,13 @@ class _BoxImpl<E> implements Box<E> {
 
       final frames = <Frame>[];
       for (final entry in entries.entries) {
+        final typeId = Hive._typeRegistry.findTypeId(entry.value);
+        final serializedValue = Hive._typeRegistry.toJson(entry.value);
         final frame = Frame(
           id: collection.autoIncrement(),
-          typeId: Hive._typeRegistry.findTypeId(entry.value),
+          typeId: typeId,
           key: entry.key,
-          value: entry.value,
+          value: serializedValue,
         );
         frames.add(frame);
       }
@@ -253,10 +259,12 @@ class _BoxImpl<E> implements Box<E> {
 
       final frames = <Frame>[];
       for (final value in values) {
+        final typeId = Hive._typeRegistry.findTypeId(value);
+        final serializedValue = Hive._typeRegistry.toJson(value);
         final frame = Frame(
           id: idsInRange[frames.length],
-          typeId: Hive._typeRegistry.findTypeId(value),
-          value: value,
+          typeId: typeId,
+          value: serializedValue,
         );
         frames.add(frame);
       }
@@ -267,11 +275,13 @@ class _BoxImpl<E> implements Box<E> {
   @override
   void add(E value, {String? key}) {
     write(() {
+      final typeId = Hive._typeRegistry.findTypeId(value);
+      final serializedValue = Hive._typeRegistry.toJson(value);
       final frame = Frame(
         id: collection.autoIncrement(),
-        typeId: Hive._typeRegistry.findTypeId(value),
+        typeId: typeId,
         key: key,
-        value: value,
+        value: serializedValue,
       );
       collection.put(frame);
     });
@@ -282,10 +292,12 @@ class _BoxImpl<E> implements Box<E> {
     write(() {
       final frames = <Frame>[];
       for (final value in values) {
+        final typeId = Hive._typeRegistry.findTypeId(value);
+        final serializedValue = Hive._typeRegistry.toJson(value);
         final frame = Frame(
           id: collection.autoIncrement(),
-          typeId: Hive._typeRegistry.findTypeId(value),
-          value: value,
+          typeId: typeId,
+          value: serializedValue,
         );
         frames.add(frame);
       }

@@ -1,4 +1,22 @@
 ````markdown
+# 1.1.23
+### Features
+- **Enhanced Serialization Support**: Added `toJson` parameter to `registerAdapter()` for complete serialization control
+  - Custom types can now provide both `fromJson` and `toJson` functions for full bidirectional serialization
+  - Resolves JSON encoding errors when storing complex objects without `toJson()` methods
+  - Type-safe implementation with runtime wrapper to handle generic type erasure
+  - Example usage: `Hive.registerAdapter<T>('TypeName', fromJson, Type, toJson)`
+  
+### Bug Fixes
+- **JSON Encoding**: Fixed "Converting object to an encodable object failed" error when storing custom objects
+  - Objects are now properly serialized to JSON before storage in the database
+  - All write operations (`put`, `add`, `putAll`, etc.) now serialize values before persisting
+
+### Technical Improvements
+- Enhanced `_TypeRegistry` with `toJson()` method for dynamic value serialization
+- Updated all box write operations to serialize values using registered adapters
+- Added type-safe wrapper in `register()` to handle generic type casting at runtime
+
 # 1.1.22
 ### Features
 - **Inspector Parameter**: Re-added `inspector` boolean parameter to `Hive.box()` method

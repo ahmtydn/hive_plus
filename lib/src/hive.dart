@@ -33,12 +33,13 @@ class Hive {
   ///   }
   /// }
   ///
-  /// Hive.registerAdapter('Person', Person.fromJson, Person);
+  /// Hive.registerAdapter('Person', Person.fromJson, Person, (p) => p.toJson());
   /// ```
   static void registerAdapter<T>(
     String typeName,
     T? Function(dynamic json) fromJson, [
     Type? type,
+    Map<String, dynamic>? Function(T value)? toJson,
   ]) {
     final resolvedType = type ?? T;
     if (resolvedType == dynamic) {
@@ -48,6 +49,7 @@ class Hive {
       resolvedType,
       Isar.fastHash(typeName),
       fromJson,
+      toJson,
     );
   }
 

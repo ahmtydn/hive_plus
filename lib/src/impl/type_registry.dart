@@ -16,15 +16,30 @@ class _TypeRegistry {
     Type type,
     int typeId,
     T? Function(dynamic json) fromJson,
+    Map<String, dynamic>? Function(T value)? toJson,
   ) {
     if (type == dynamic) {
       throw ArgumentError('Cannot register dynamic type.');
+    }
+
+    // Wrap toJson to accept dynamic and cast to T
+    Map<String, dynamic>? Function(dynamic)? wrappedToJson;
+    if (toJson != null) {
+      wrappedToJson = (dynamic value) {
+        if (value is T) {
+          return toJson(value);
+        }
+        throw ArgumentError(
+          'Type mismatch in toJson. Expected $T but got ${value.runtimeType}.',
+        );
+      };
     }
 
     final handler = _TypeHandler<T>(
       type,
       typeId,
       (map) => fromJson(map),
+      wrappedToJson,
     );
     _registry[typeId] = handler;
     _reverseRegistry[type] = handler;
@@ -56,6 +71,24 @@ class _TypeRegistry {
     }
   }
 
+  dynamic toJson(dynamic value) {
+    final handler = _reverseRegistry[value.runtimeType];
+    if (handler != null && handler.toJson != null) {
+      return handler.toJson!(value);
+    }
+
+    // Check if the value matches any registered handler
+    for (final MapEntry(key: type, value: h) in _reverseRegistry.entries) {
+      if (h.handlesValue(value) && h.toJson != null) {
+        _reverseRegistry[type] = h;
+        return h.toJson!(value);
+      }
+    }
+
+    // If no handler found, return value as-is for built-in types
+    return value;
+  }
+
   int? findTypeId(dynamic value) {
     final handler = _reverseRegistry[value.runtimeType];
     if (handler != null) {
@@ -85,16 +118,23 @@ T? _noop<T>(Map<String, dynamic> json) {
 }
 
 class _TypeHandler<T> {
-  const _TypeHandler(this.type, this.typeId, this.fromJson);
+  const _TypeHandler(
+    this.type,
+    this.typeId,
+    this.fromJson,
+    this.toJson,
+  );
 
   const _TypeHandler.builtin(this.type)
       : typeId = null,
-        fromJson = _noop;
+        fromJson = _noop,
+        toJson = null;
 
   final Type type;
   final int? typeId;
 
   final T? Function(Map<String, dynamic> json) fromJson;
+  final Map<String, dynamic>? Function(dynamic value)? toJson;
 
   bool handlesValue(dynamic value) {
     return value.runtimeType == type || value is T;
