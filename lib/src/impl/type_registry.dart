@@ -1,25 +1,33 @@
 part of hive_plus_secure;
 
-const _builtinTypes = {
-  bool: _TypeHandler<bool>.builtin(),
-  num: _TypeHandler<num>.builtin(),
-  String: _TypeHandler<String>.builtin(),
-  List: _TypeHandler<List<dynamic>>.builtin(),
-  Map: _TypeHandler<Map<String, dynamic>>.builtin(),
+final _builtinTypes = <Type, _TypeHandler<dynamic>>{
+  bool: const _TypeHandler<bool>.builtin(bool),
+  num: const _TypeHandler<num>.builtin(num),
+  String: const _TypeHandler<String>.builtin(String),
+  List: const _TypeHandler<List<dynamic>>.builtin(List),
+  Map: const _TypeHandler<Map<String, dynamic>>.builtin(Map),
 };
 
 class _TypeRegistry {
   final Map<int, _TypeHandler<dynamic>> _registry = {};
   final Map<Type, _TypeHandler<dynamic>> _reverseRegistry = {..._builtinTypes};
 
-  void register<T>(int typeId, T? Function(dynamic json) fromJson) {
-    if (T == dynamic) {
+  void register<T>(
+    Type type,
+    int typeId,
+    T? Function(dynamic json) fromJson,
+  ) {
+    if (type == dynamic) {
       throw ArgumentError('Cannot register dynamic type.');
     }
 
-    final handler = _TypeHandler<T>(typeId, fromJson);
+    final handler = _TypeHandler<T>(
+      type,
+      typeId,
+      (map) => fromJson(map),
+    );
     _registry[typeId] = handler;
-    _reverseRegistry[T] = handler;
+    _reverseRegistry[type] = handler;
   }
 
   T fromJson<T>(int? typeId, dynamic json) {
@@ -77,17 +85,18 @@ T? _noop<T>(Map<String, dynamic> json) {
 }
 
 class _TypeHandler<T> {
-  const _TypeHandler(this.typeId, this.fromJson);
+  const _TypeHandler(this.type, this.typeId, this.fromJson);
 
-  const _TypeHandler.builtin()
+  const _TypeHandler.builtin(this.type)
       : typeId = null,
         fromJson = _noop;
 
+  final Type type;
   final int? typeId;
 
   final T? Function(Map<String, dynamic> json) fromJson;
 
   bool handlesValue(dynamic value) {
-    return value is T;
+    return value.runtimeType == type || value is T;
   }
 }

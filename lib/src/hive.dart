@@ -6,7 +6,7 @@ class Hive {
   static final _openBoxes = <String, Box<dynamic>>{};
 
   /// The default name if you don't specify a name for a box.
-  static const defaultName = 'hive';
+  static const defaultName = 'hive_plus';
 
   /// The default directory for all boxes.
   static String? defaultDirectory;
@@ -33,13 +33,22 @@ class Hive {
   ///   }
   /// }
   ///
-  /// Hive.registerAdapter('Person', Person.fromJson);
+  /// Hive.registerAdapter('Person', Person.fromJson, Person);
   /// ```
   static void registerAdapter<T>(
     String typeName,
-    T? Function(dynamic json) fromJson,
-  ) {
-    _typeRegistry.register<T>(Isar.fastHash(typeName), fromJson);
+    T? Function(dynamic json) fromJson, [
+    Type? type,
+  ]) {
+    final resolvedType = type ?? T;
+    if (resolvedType == dynamic) {
+      throw ArgumentError('Cannot register adapter for dynamic type.');
+    }
+    _typeRegistry.register<T>(
+      resolvedType,
+      Isar.fastHash(typeName),
+      fromJson,
+    );
   }
 
   /// Get or open the box with [name] in the given [directory]. If no directory
@@ -129,5 +138,31 @@ class Hive {
     for (final box in _openBoxes.values) {
       box.deleteFromDisk();
     }
+  }
+
+  /// Drop a database without opening it first.
+  ///
+  /// This is useful when you need to drop a corrupted or encrypted database
+  /// that cannot be opened with the current encryption key.
+  ///
+  /// [name] is the name of the database to drop.
+  ///
+  /// [directory] is the directory where the database files are stored.
+  ///
+  /// [encryptionKey] determines the storage engine used
+  /// (SQLite if provided, Isar if null).
+  static void dropDatabase({
+    required String name,
+    required String directory,
+    String? encryptionKey,
+  }) {
+    Isar.deleteDatabase(
+      name: name,
+      directory: directory,
+      engine: encryptionKey != null ? IsarEngine.sqlite : IsarEngine.isar,
+    );
+
+    // Remove from open boxes if it was open
+    _openBoxes.remove(name);
   }
 }

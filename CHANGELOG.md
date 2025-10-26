@@ -1,3 +1,9 @@
+# 1.1.21
+### Bug Fixes
+- **Adapter Registration**: Ensure custom adapters register against the concrete runtime type to prevent cache mix-ups when using mixins or generics
+  - Adds optional `Type type` parameter to `Hive.registerAdapter()` for explicit registrations (e.g. mixin-based models)
+  - Prevents `Type mismatch` errors when retrieving values from boxes containing multiple cache model implementations
+
 # 1.1.20
 ### Features
 - **Drop Database**: Added `dropDatabase()` static method to `Hive` class
