@@ -1,3 +1,11 @@
+````markdown
+# 1.1.22
+### Features
+- **Inspector Parameter**: Re-added `inspector` boolean parameter to `Hive.box()` method
+  - Allows enabling/disabling the Isar Inspector for debugging purposes
+  - Defaults to `true` for backward compatibility
+  - Usage: `Hive.box<T>(inspector: false)` to disable inspector
+
 # 1.1.21
 ### Bug Fixes
 - **Adapter Registration**: Ensure custom adapters register against the concrete runtime type to prevent cache mix-ups when using mixins or generics

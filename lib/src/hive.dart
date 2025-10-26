@@ -62,11 +62,15 @@ class Hive {
   /// The [maxSizeMiB] is the maximum size of the box in MiB. If the box grows
   /// bigger than this, an exception is thrown. It is recommended to set this
   /// value to a small value if possible.
+  ///
+  /// The [inspector] parameter allows enabling/disabling the Isar Inspector
+  /// for debugging purposes. Defaults to `true` for backward compatibility.
   static Box<E> box<E>({
     String name = defaultName,
     String? directory,
     String? encryptionKey,
     int maxSizeMiB = 5,
+    bool inspector = true,
   }) {
     final box = _openBoxes[name];
     if (box != null) {
@@ -93,7 +97,7 @@ class Hive {
       engine: encryptionKey != null ? IsarEngine.sqlite : IsarEngine.isar,
       maxSizeMiB: maxSizeMiB,
       encryptionKey: encryptionKey,
-      inspector: false,
+      inspector: inspector,
     );
     final newBox = _BoxImpl<E>(isar);
     _openBoxes[name] = newBox;
