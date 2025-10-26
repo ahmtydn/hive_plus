@@ -1,6 +1,7 @@
 part of hive_plus_secure;
 
 /// A box contains and manages a collection of key-value pairs.
+@pragma('vm:isolate-unsendable')
 abstract interface class Box<E> {
   /// Whether this box is currently open.
   ///

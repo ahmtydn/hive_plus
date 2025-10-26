@@ -14,7 +14,7 @@ extension GetFrameCollection on Isar {
   IsarCollection<int, Frame> get frames => this.collection();
 }
 
-const FrameSchema = IsarGeneratedSchema(
+final FrameSchema = IsarGeneratedSchema(
   schema: IsarSchema(
     name: 'Frame',
     idName: 'id',
@@ -49,7 +49,7 @@ const FrameSchema = IsarGeneratedSchema(
     deserialize: deserializeFrame,
     deserializeProperty: deserializeFrameProp,
   ),
-  embeddedSchemas: [],
+  getEmbeddedSchemas: () => [],
 );
 
 @isarProtected

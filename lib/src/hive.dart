@@ -2,11 +2,11 @@ part of hive_plus_secure;
 
 /// Open boxes and register adapters.
 class Hive {
-  static final _typeRegistry = _TypeRegistry();
+  static var _typeRegistry = _TypeRegistry();
   static final _openBoxes = <String, Box<dynamic>>{};
 
   /// The default name if you don't specify a name for a box.
-  static const defaultName = 'hive_plus';
+  static const defaultName = 'hive';
 
   /// The default directory for all boxes.
   static String? defaultDirectory;
@@ -33,25 +33,13 @@ class Hive {
   ///   }
   /// }
   ///
-  /// Hive.registerAdapter('Person', Person.fromJson, Person);
-  /// ```
-  ///
-  /// For types that require a custom serializer:
-  /// ```dart
-  /// Hive.registerAdapter(
-  ///   'SyncOperation',
-  ///   (json) => SyncOperation.fromJson(json, Birthday.fromJson),
-  ///   SyncOperation,
-  ///   (value) => value.toJson((item) => item.toJson()),
-  /// );
+  /// Hive.registerAdapter('Person', Person.fromJson);
   /// ```
   static void registerAdapter<T>(
     String typeName,
     T? Function(dynamic json) fromJson,
-    Type? type, [
-    Map<String, dynamic>? Function(T value)? toJson,
-  ]) {
-    _typeRegistry.register<T>(Isar.fastHash(typeName), fromJson, type, toJson);
+  ) {
+    _typeRegistry.register<T>(Isar.fastHash(typeName), fromJson);
   }
 
   /// Get or open the box with [name] in the given [directory]. If no directory
@@ -65,15 +53,11 @@ class Hive {
   /// The [maxSizeMiB] is the maximum size of the box in MiB. If the box grows
   /// bigger than this, an exception is thrown. It is recommended to set this
   /// value to a small value if possible.
-  ///
-  /// [inspector] enables the Isar inspector when the app is running in debug
-  /// mode. In release mode the inspector is always disabled.
   static Box<E> box<E>({
     String name = defaultName,
     String? directory,
     String? encryptionKey,
     int maxSizeMiB = 5,
-    bool inspector = true,
   }) {
     final box = _openBoxes[name];
     if (box != null) {
@@ -100,11 +84,35 @@ class Hive {
       engine: encryptionKey != null ? IsarEngine.sqlite : IsarEngine.isar,
       maxSizeMiB: maxSizeMiB,
       encryptionKey: encryptionKey,
-      inspector: inspector,
+      inspector: false,
     );
     final newBox = _BoxImpl<E>(isar);
     _openBoxes[name] = newBox;
     return newBox;
+  }
+
+  /// Runs [computation] in a new isolate and returns the result. Also takes
+  /// care of initializing Hive and closing all boxes afterwards.
+  ///
+  /// The optional [debugName] can be used to identify the isolate in debuggers.
+  static Future<T> compute<T>(
+    FutureOr<T> Function() computation, {
+    String? debugName,
+  }) {
+    final registry = _typeRegistry;
+    final dir = defaultDirectory;
+    return Isolate.run(
+      () async {
+        Hive._typeRegistry = registry;
+        Hive.defaultDirectory = dir;
+        try {
+          return await computation();
+        } finally {
+          Hive.closeAllBoxes();
+        }
+      },
+      debugName: debugName ?? 'Hive Isolate',
+    );
   }
 
   /// Closes all open boxes.
@@ -121,31 +129,5 @@ class Hive {
     for (final box in _openBoxes.values) {
       box.deleteFromDisk();
     }
-  }
-
-  /// Drop a database without opening it first.
-  ///
-  /// This is useful when you need to drop a corrupted or encrypted database
-  /// that cannot be opened with the current encryption key.
-  ///
-  /// [name] is the name of the database to drop.
-  ///
-  /// [directory] is the directory where the database files are stored.
-  ///
-  /// [encryptionKey] determines the storage engine used
-  /// (SQLite if provided, Isar if null).
-  static void dropDatabase({
-    required String name,
-    required String directory,
-    String? encryptionKey,
-  }) {
-    Isar.deleteDatabase(
-      name: name,
-      directory: directory,
-      engine: encryptionKey != null ? IsarEngine.sqlite : IsarEngine.isar,
-    );
-
-    // Remove from open boxes if it was open
-    _openBoxes.remove(name);
   }
 }

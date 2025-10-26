@@ -3,6 +3,7 @@
 library hive_plus_secure;
 
 import 'dart:async';
+import 'dart:isolate';
 
 import 'package:hive_plus_secure/src/impl/frame.dart';
 import 'package:isar_plus/isar_plus.dart';

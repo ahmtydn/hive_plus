@@ -80,11 +80,6 @@ class _BoxImpl<E> implements Box<E> {
     return Hive._typeRegistry.fromJson(frame.typeId, frame.value);
   }
 
-  dynamic _valueToJson(E value) {
-    final json = Hive._typeRegistry.toJson(value);
-    return json ?? value;
-  }
-
   @override
   bool containsKey(String key) {
     return !collection.where().keyEqualTo(key).isEmpty();
@@ -175,14 +170,11 @@ class _BoxImpl<E> implements Box<E> {
   @override
   void put(String key, E value) {
     write(() {
-      final existingFrame = collection.where().keyEqualTo(key).findFirst();
-      final id = existingFrame?.id ?? collection.autoIncrement();
-
       final frame = Frame(
-        id: id,
+        id: collection.autoIncrement(),
         typeId: Hive._typeRegistry.findTypeId(value),
         key: key,
-        value: _valueToJson(value),
+        value: value,
       );
       collection.put(frame);
     });
@@ -200,7 +192,7 @@ class _BoxImpl<E> implements Box<E> {
       final frame = Frame(
         id: idAtIndex,
         typeId: Hive._typeRegistry.findTypeId(value),
-        value: _valueToJson(value),
+        value: value,
       );
       collection.put(frame);
     });
@@ -228,7 +220,7 @@ class _BoxImpl<E> implements Box<E> {
           id: collection.autoIncrement(),
           typeId: Hive._typeRegistry.findTypeId(entry.value),
           key: entry.key,
-          value: _valueToJson(entry.value),
+          value: entry.value,
         );
         frames.add(frame);
       }
@@ -262,7 +254,7 @@ class _BoxImpl<E> implements Box<E> {
         final frame = Frame(
           id: idsInRange[frames.length],
           typeId: Hive._typeRegistry.findTypeId(value),
-          value: _valueToJson(value),
+          value: value,
         );
         frames.add(frame);
       }
@@ -277,7 +269,7 @@ class _BoxImpl<E> implements Box<E> {
         id: collection.autoIncrement(),
         typeId: Hive._typeRegistry.findTypeId(value),
         key: key,
-        value: _valueToJson(value),
+        value: value,
       );
       collection.put(frame);
     });
@@ -291,7 +283,7 @@ class _BoxImpl<E> implements Box<E> {
         final frame = Frame(
           id: collection.autoIncrement(),
           typeId: Hive._typeRegistry.findTypeId(value),
-          value: _valueToJson(value),
+          value: value,
         );
         frames.add(frame);
       }
