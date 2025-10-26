@@ -33,7 +33,12 @@ class Hive {
   ///   }
   /// }
   ///
-  /// Hive.registerAdapter('Person', Person.fromJson, Person, (p) => p.toJson());
+  /// Hive.registerAdapter(
+  ///   'Person',
+  ///   Person.fromJson,
+  ///   Person,
+  ///   (p) => p.toJson(),
+  /// );
   /// ```
   static void registerAdapter<T>(
     String typeName,
