@@ -153,12 +153,12 @@ class _BoxImpl<E> implements Box<E> {
     final frames = collection
         .where()
         .optional(
-          endKey != null,
           (q) => q.keyBetween(startKey ?? '', endKey),
+          enabled: endKey != null,
         )
         .optional(
-          endKey == null,
           (q) => q.keyGreaterThanOrEqualTo(startKey ?? ''),
+          enabled: endKey == null,
         )
         .findAll()
         .map(_frameFromJson)
