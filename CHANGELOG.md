@@ -1,4 +1,13 @@
 ````markdown
+# 1.1.24
+### Chore / Fixes
+- Bumped package version to 1.1.24 in `pubspec.yaml`.
+- Updated `isar_plus` dependency to `1.1.5`.
+- Fix: compile error in `box_impl.dart` (merged PR #2).
+
+### Refactor
+- Improved query handling in `_BoxImpl` to support conditional parameters and simplified endKey logic.
+
 # 1.1.23
 ### Features
 - **Enhanced Serialization Support**: Added `toJson` parameter to `registerAdapter()` for complete serialization control
