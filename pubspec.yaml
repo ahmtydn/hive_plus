@@ -1,16 +1,24 @@
 name: hive_plus_secure
-description: Lightweight and blazing fast key-value database written in pure Dart. Strongly encrypted using AES-256. Fork of the original Hive package with continued maintenance.
+description: Lightweight and buzzing-fast key-value database made for Flutter and Dart.
 version: 1.1.24
 homepage: https://github.com/ahmtydn/hive_plus
 documentation: https://github.com/ahmtydn/hive_plus
+issue_tracker: https://github.com/ahmtydn/hive_plus/issues
+funding:
+  - https://github.com/sponsors/ahmtydn/
+topics:
+  - database
+  - hive
+  - nosql
+  - encryption
+  - storage
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   isar_plus: ^1.1.5
   meta: ^1.9.0
-
 
 dev_dependencies:
   build_runner: ^2.4.6

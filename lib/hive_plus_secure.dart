@@ -1,9 +1,8 @@
-/// Hive Plus is a lightweight and blazing fast key-value store made
-/// for Flutter and Dart. It is strongly encrypted using AES-256.
 library hive_plus_secure;
 
 import 'dart:async';
-import 'dart:isolate';
+import 'dart:isolate'
+    if (dart.library.html) 'package:hive_plus_secure/src/impl/isolate_stub.dart';
 
 import 'package:hive_plus_secure/src/impl/frame.dart';
 import 'package:isar_plus/isar_plus.dart';

@@ -1,27 +1,33 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hivedb/hive/master/.github/logo_transparent.svg?sanitize=true" width="350px">
+  <img src="https://raw.githubusercontent.com/hivedb/hive/master/.github/hive.svg?sanitize=true" width="300px">
 </p>
-<h2 align="center">Hive Plus - Fast, Enjoyable & Secure NoSQL Database</h2>
+<h2 align="center">Fast, Enjoyable & Secure NoSQL Database</h2>
 
 <p align="center">
   <a href="https://pub.dev/packages/hive_plus_secure">
     <img src="https://img.shields.io/pub/v/hive_plus_secure?label=pub.dev&labelColor=333940&logo=dart">
   </a>
-  <a href="https://github.com/ahmtydn/hive_plus_secure/actions">
+  <a href="https://github.com/ahmtydn/hive_plus_secure/actions/workflows/Dart CI.yaml">
     <img src="https://img.shields.io/github/actions/workflow/status/ahmtydn/hive_plus_secure/test.yml?branch=main&label=tests&labelColor=333940&logo=github">
+  </a>
+  <a href="https://app.codecov.io/gh/ahmtydn/hive_plus_secure">
+    <img src="https://img.shields.io/codecov/c/github/ahmtydn/hive_plus_secure?logo=codecov&logoColor=fff&labelColor=333940">
+  </a>
+  <a href="https://t.me/isarplus">
+    <img src="https://img.shields.io/static/v1?label=join&message=Isar%20%26%20Hive&labelColor=333940&logo=telegram&logoColor=white&color=229ED9">
   </a>
 </p>
 
-Hive Plus is a lightweight and buzzing-fast key-value database made for Flutter and Dart. This is a maintained fork of the original Hive package.
+Hive is a lightweight and buzzing-fast key-value database made for Flutter and Dart.
 
 ## Features 🌟
 
 - 🌍 Bee everywhere: mobile, desktop, browser
-- 🚀 Buzzing speed: Hive's wings flap faster than the rest!
+- 🚀 Buzzing speed: Faster than a bee on caffeine!
 - 💡 Sweet, powerful, & intuitive API
-- 🔐 Queen's Guard on duty: Encryption is built right in.
-- 🧠 Thinking in swarms: Hive supports multiple isolates.
-- 🍯 Hive comes with everything a bee needs and more!
+- 🔐 Queen's Guard: Encryption built right in.
+- 🧠 Thinking in swarms: Multi-isolate support.
+- 🍯 Everything a bee needs and more!
 
 > Bee fact: A single bee can visit 5,000 flowers in a day!
 
@@ -31,13 +37,13 @@ Feeling the excitement? Great! Let's help you take your first flight with Hive.
 
 #### 🔗 Add dependencies
 
-To kickstart the journey add `hive_plus_secure`, `isar_flutter_libs` and `path_provider` to your `pubspec.yaml`.
+To kickstart the journey add `hive_plus_secure`, `isar_plus_flutter_libs` and `path_provider` to your `pubspec.yaml`.
 
 ```yaml
 dependencies:
   hive_plus_secure: ^latest_version
   isar_plus_flutter_libs: ^latest_version
-  path_provider: ^2.1.0
+  path_provider: ^latest_version
 ```
 
 Pssst! 🤫 `path_provider` will help you to find the optimal directory for each platform.
@@ -82,14 +88,15 @@ Want to jump to a specific section? Here's a handy table of contents:
 
 - [Opening Boxes](#-opening-boxes)
 - [Closing Boxes](#-bidding-adieu-closing-boxes)
-- [Inserting](#%EF%B8%8F-filling-the-honeycomb-inserting-data)
+- [Inserting](#-filling-the-honeycomb-inserting-data)
 - [Reading](#-extracting-honey-i-mean-data)
 - [Deleting](#-deleting-data)
 - [Using Boxes like Lists](#-using-boxes-like-lists)
-- [Type safety](#%EF%B8%8F-type-safety)
+- [Type safety](#-type-safety)
 - [Non-primitive Objects](#-bee-yond-the-basics-non-primitive-objects)
 - [Transactions](#-transactions)
-- [FAQ](#-buzzworthy-questions-faq)
+- [Isolates](#-the-isolate-dance)
+- [FAQ](#-buzzworthy-questions)
 
 > Bee fact: Bees have five eyes – three simple eyes on top of the head, and two compound eyes, with numerous hexagonal facets.
 
@@ -297,6 +304,7 @@ final bumble = Bee(name: 'Bumble', role: 'Worker');
 box.put('BumbleID', bumble);
 
 print(box.get('BumbleID')); // Bumble - Worker
+```
 
 > Bee fact: Bees are responsible for pollinating about one-third of the world's food crops.
 
@@ -334,7 +342,37 @@ print(box.get('honeyLevel')); // 5
 
 > Bee fact: Bees can recognize human faces, and they can even be trained to associate a picture of a face with sweet treats!
 
-### 🍯 Buzzworthy Questions: FAQ
+### 💃 The Isolate Dance
+
+Just like a beehive where multiple bees work simultaneously, you can buzz into Hive from various Isolates at the same time. This nifty trick is great when you wish to keep those database activities separate from your UI thread.
+
+Hive comes with a sweet `Hive.compute()` method that runs a function in a different isolate. The best part? It also does the honey-making job of setting up and tidying resources for you.
+
+```dart
+// Opening the bee's box
+final box = Hive.box();
+
+// Storing some sweet nectar
+box.put('nectarType', 'wildflower');
+
+await Hive.compute(() {
+  // Accessing the same box from another worker bee
+  final box = Hive.box();
+  print(box.get('nectarType')); // wildflower
+
+  // Updating the nectar's quality
+  box.put('nectarType', 'lavender');
+});
+
+// Tasting the updated honey flavor
+print(honeycomb.get('nectarType')); // lavender
+```
+
+Just remember, while the bees dance in harmony, ensure your Isolates do too! 🐝🎶
+
+> Bee fact: Bees have two pairs of wings, and they beat 11,400 times per minute.
+
+### 🍯 Buzzworthy Questions
 
 #### 🐝 To bee or not to bee: Hive or Isar?
 
