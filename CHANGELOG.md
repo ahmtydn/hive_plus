@@ -1,46 +1,89 @@
 ````markdown
+# 1.1.25
+
+### Features
+
+- **Hive.init() Method**: Added new `init()` method for simplified initialization
+  - On web platforms, Isar is automatically initialized with IndexedDB storage
+  - On other platforms, accepts `directory` path or `getDirectory` callback
+  - Added `isInitialized` getter to check initialization state
+
+### Improvements
+
+- **Web Platform Support**: Automatic platform detection using conditional imports
+  - Added `is_web_io.dart` and `is_web_html.dart` for reliable platform detection
+  - Uses SQLite engine on web for better IndexedDB compatibility
+
+### Example Usage
+
+```dart
+// For Flutter apps
+await Hive.init(
+  getDirectory: () async {
+    final dir = await getApplicationDocumentsDirectory();
+    return dir.path;
+  },
+);
+
+// For web apps (no directory needed)
+await Hive.init();
+```
+
 # 1.1.24
+
 ### Chore / Fixes
+
 - Bumped package version to 1.1.24 in `pubspec.yaml`.
 - Updated `isar_plus` dependency to `1.1.5`.
 - Fix: compile error in `box_impl.dart` (merged PR #2).
 
 ### Refactor
+
 - Improved query handling in `_BoxImpl` to support conditional parameters and simplified endKey logic.
 
 # 1.1.23
+
 ### Features
+
 - **Enhanced Serialization Support**: Added `toJson` parameter to `registerAdapter()` for complete serialization control
   - Custom types can now provide both `fromJson` and `toJson` functions for full bidirectional serialization
   - Resolves JSON encoding errors when storing complex objects without `toJson()` methods
   - Type-safe implementation with runtime wrapper to handle generic type erasure
   - Example usage: `Hive.registerAdapter<T>('TypeName', fromJson, Type, toJson)`
-  
+
 ### Bug Fixes
+
 - **JSON Encoding**: Fixed "Converting object to an encodable object failed" error when storing custom objects
   - Objects are now properly serialized to JSON before storage in the database
   - All write operations (`put`, `add`, `putAll`, etc.) now serialize values before persisting
 
 ### Technical Improvements
+
 - Enhanced `_TypeRegistry` with `toJson()` method for dynamic value serialization
 - Updated all box write operations to serialize values using registered adapters
 - Added type-safe wrapper in `register()` to handle generic type casting at runtime
 
 # 1.1.22
+
 ### Features
+
 - **Inspector Parameter**: Re-added `inspector` boolean parameter to `Hive.box()` method
   - Allows enabling/disabling the Isar Inspector for debugging purposes
   - Defaults to `true` for backward compatibility
   - Usage: `Hive.box<T>(inspector: false)` to disable inspector
 
 # 1.1.21
+
 ### Bug Fixes
+
 - **Adapter Registration**: Ensure custom adapters register against the concrete runtime type to prevent cache mix-ups when using mixins or generics
   - Adds optional `Type type` parameter to `Hive.registerAdapter()` for explicit registrations (e.g. mixin-based models)
   - Prevents `Type mismatch` errors when retrieving values from boxes containing multiple cache model implementations
 
 # 1.1.20
+
 ### Features
+
 - **Drop Database**: Added `dropDatabase()` static method to `Hive` class
   - Allows dropping a database without opening it first
   - Useful for corrupted or encrypted databases that cannot be opened with the current encryption key
@@ -48,27 +91,36 @@
   - Automatically removes the database from open boxes if it was previously open
 
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.28` for improved stability and performance
 
 # 1.1.19
+
 ### Improvements
+
 - **Enhanced Error Handling**: Added `EncryptionError` to the exported API for better error handling and debugging
   - Now exports `EncryptionError` from `isar_plus` package for improved encryption error handling
   - Provides developers with more granular control over encryption-related exceptions
 
 # 1.1.18
+
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.27` for improved stability and performance.
 
 # 1.1.17
+
 ### Features
+
 - **Inspector Parameter**: Added `inspector` boolean parameter to `Hive.box()` method
   - Allows enabling/disabling the Isar Inspector for debugging purposes
   - Defaults to `true` for backward compatibility
   - Usage: `Hive.box<T>(inspector: false)` to disable inspector
 
 # 1.1.16
+
 ### Bug Fixes
+
 - **Fixed Type Casting Issue**: Resolved type mismatch error when using custom `toJson` serializers with generic types
   - Fixed `type '(T) => Map<String, dynamic>' is not a subtype of type '((dynamic) => Map<String, dynamic>?)?'` error
   - Modified `_TypeHandler` to accept `dynamic` parameter in `toJson` function signature
@@ -76,7 +128,9 @@
 - **Fixed Type Inference**: Added explicit type argument to `_noop` function in `_TypeHandler.builtin()` constructor
 
 # 1.1.15
+
 ### Features
+
 - **Custom Serialization Support**: Added support for custom `toJson` serializers in `registerAdapter()`
   - Allows registration of types with custom serialization logic (e.g., generic classes with type parameters)
   - New signature: `registerAdapter<T>(String typeName, T? Function(dynamic json) fromJson, Type? type, [Map<String, dynamic>? Function(T value)? toJson])`
@@ -84,60 +138,85 @@
   - Backward compatible - `toJson` parameter is optional
 
 ### Bug Fixes
+
 - Fixed JSON encoding errors for types with parameterized `toJson()` methods
 - Resolved "Converting object to an encodable object failed" errors when storing generic types
 
 # 1.1.14
+
 ### Bug Fixes
+
 - **Fixed ID Assignment**: Fixed `put()` method to reuse existing frame ID when updating a value instead of always creating a new auto-incremented ID
   - This resolves potential memory leaks and ensures proper key-value updates
 
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.21` for improved stability and performance
 
 # 1.1.13
+
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.20` for improved stability and performance.
 
 # 1.1.12
+
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.19` for improved stability and performance.
 
 # 1.1.11
+
 ### Improvements
+
 - **Enhanced Export API**: Added export for `ChangeType` enum from `isar_plus` package for better API access and type safety when working with change details
 
 # 1.1.10
+
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.18` for improved stability and performance.
 
 # 1.1.9
+
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.17` for improved stability and performance.
 
 # 1.1.8
+
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.16` for improved stability and performance.
 
 # 1.1.7
+
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.15` for improved stability and performance.
 
 # 1.1.6
+
 ### Features
+
 - **Enhanced Watch API**: Added optional `documentParser` parameter to `watchDetailed<T>()` method for custom document parsing
   - Allows users to provide custom parsing logic for better type safety and flexibility
   - Method signature: `watchDetailed<T>({T Function(Map<String, dynamic>)? documentParser})`
 
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.14` for enhanced functionality and stability
 
 # 1.1.5
+
 ### Improvements
+
 - exported `DocumentSerializable` from `isar_plus` package for better type constraints in `watchDetailed<T>()` method
 
 # 1.1.4
+
 ### Features
+
 - **Enhanced Type Safety**: Added generic type parameter support to `watchDetailed<T>()` method for improved type safety
 - **Export Enhancement**: Added export for `ChangeDetail` class from `isar_plus` package for better API access
 - **Improved Documentation**: Comprehensive documentation updates for `watchDetailed()` method including:
@@ -147,17 +226,21 @@
   - Clear explanation of change types and thread safety
 
 ### Breaking Changes
+
 - `Box.watchDetailed()` method now requires a generic type parameter `T extends DocumentSerializable`
 - Method signature changed from `Stream<ChangeDetail> watchDetailed()` to `Stream<ChangeDetail<T>> watchDetailed<T extends DocumentSerializable>()`
 
 # 1.1.3
+
 ### Improvements
+
 - Updated dependency `isar_plus` to version `^1.0.13`
 
 # 1.1.2
-### Improvements
-- Updated dependency `isar_plus` to version `^1.0.12` for improved stability and performance.
 
+### Improvements
+
+- Updated dependency `isar_plus` to version `^1.0.12` for improved stability and performance.
 
 # 1.1.1
 
@@ -191,13 +274,14 @@
 
 # 1.0.0
 
-### Hive Plus Fork 
+### Hive Plus Fork
 
 This package is a maintained fork of the original Hive package. The original Hive package is no longer actively maintained, so this fork continues development and maintenance.
 
 Key changes in this fork:
+
 - Package renamed from `hive` to `hive_plus`
-- Updated repository and homepage links  
+- Updated repository and homepage links
 - Continued maintenance and bug fixes
 - Library name changed to `hive_plus`
 
@@ -723,3 +807,4 @@ This also applies to the web version.
 ⚠️ **DEPRECATED: Use hive_plus instead** ⚠️
 
 - First release
+````
