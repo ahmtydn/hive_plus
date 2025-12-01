@@ -5,6 +5,8 @@ import 'dart:isolate'
     if (dart.library.html) 'package:hive_plus_secure/src/impl/isolate_stub.dart';
 
 import 'package:hive_plus_secure/src/impl/frame.dart';
+import 'package:hive_plus_secure/src/impl/is_web_io.dart'
+    if (dart.library.js_interop) 'package:hive_plus_secure/src/impl/is_web_html.dart';
 import 'package:isar_plus/isar_plus.dart';
 
 export 'package:isar_plus/isar_plus.dart'

@@ -4,12 +4,73 @@ part of hive_plus_secure;
 class Hive {
   static var _typeRegistry = _TypeRegistry();
   static final _openBoxes = <String, Box<dynamic>>{};
+  static bool _isInitialized = false;
 
   /// The default name if you don't specify a name for a box.
   static const defaultName = 'hive_plus';
 
   /// The default directory for all boxes.
   static String? defaultDirectory;
+
+  /// Whether Hive has been initialized.
+  static bool get isInitialized => _isInitialized;
+
+  /// Initializes Hive.
+  ///
+  /// On web, Isar is initialized automatically and IndexedDB is used.
+  /// On other platforms, you must provide either a [directory] path or a
+  /// [getDirectory] callback that returns the directory path.
+  ///
+  /// This method must be called before using any Hive functionality.
+  ///
+  /// Example:
+  /// ```dart
+  /// import 'package:path_provider/path_provider.dart';
+  ///
+  /// void main() async {
+  ///   WidgetsFlutterBinding.ensureInitialized();
+  ///   await Hive.init(
+  ///     getDirectory: () async {
+  ///       final dir = await getApplicationDocumentsDirectory();
+  ///       return dir.path;
+  ///     },
+  ///   );
+  ///   runApp(MyApp());
+  /// }
+  /// ```
+  static Future<void> init({
+    String? directory,
+    Future<String> Function()? getDirectory,
+  }) async {
+    if (_isInitialized) return;
+
+    if (_isWeb) {
+      await Isar.initialize();
+      defaultDirectory = directory ?? '';
+    } else {
+      if (directory != null && directory.isNotEmpty) {
+        defaultDirectory = directory;
+      } else if (getDirectory != null) {
+        defaultDirectory = await getDirectory();
+      } else {
+        throw ArgumentError(
+          'On non-web platforms, you must provide either a directory path or '
+          'a getDirectory callback. Example:\n'
+          'await Hive.init(\n'
+          '  getDirectory: () async {\n'
+          '    final dir = await getApplicationDocumentsDirectory();\n'
+          '    return dir.path;\n'
+          '  },\n'
+          ');',
+        );
+      }
+    }
+
+    _isInitialized = true;
+  }
+
+  /// Returns true if running on web platform.
+  static bool get _isWeb => isWebPlatform();
 
   /// Registers a type adapter to allow Hive to (de)serialize your objects.
   ///
@@ -101,7 +162,8 @@ class Hive {
       name: name,
       schemas: [FrameSchema],
       directory: dir,
-      engine: encryptionKey != null ? IsarEngine.sqlite : IsarEngine.isar,
+      engine:
+          _isWeb || encryptionKey != null ? IsarEngine.sqlite : IsarEngine.isar,
       maxSizeMiB: maxSizeMiB,
       encryptionKey: encryptionKey,
       inspector: inspector,
