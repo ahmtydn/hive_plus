@@ -4,16 +4,16 @@
 <h2 align="center">Fast, Enjoyable & Secure NoSQL Database</h2>
 
 <p align="center">
-  <a href="https://pub.dev/packages/hive_plus_secure">
+  <a href="https://pub.dev/packages/hive_plus_secure" style="text-decoration: none;">
     <img src="https://img.shields.io/pub/v/hive_plus_secure?label=pub.dev&labelColor=333940&logo=dart">
   </a>
-  <a href="https://github.com/ahmtydn/hive_plus_secure/actions/workflows/Dart CI.yaml">
-    <img src="https://img.shields.io/github/actions/workflow/status/ahmtydn/hive_plus_secure/test.yml?branch=main&label=tests&labelColor=333940&logo=github">
+  <a href="https://github.com/ahmtydn/hive_plus/actions/workflows/Dart CI.yaml" style="text-decoration: none;">
+    <img src="https://img.shields.io/github/actions/workflow/status/ahmtydn/hive_plus/test.yml?branch=main&label=tests&labelColor=333940&logo=github">
   </a>
-  <a href="https://app.codecov.io/gh/ahmtydn/hive_plus_secure">
-    <img src="https://img.shields.io/codecov/c/github/ahmtydn/hive_plus_secure?logo=codecov&logoColor=fff&labelColor=333940">
+  <a href="https://app.codecov.io/gh/ahmtydn/hive_plus" style="text-decoration: none;">
+    <img src="https://img.shields.io/codecov/c/github/ahmtydn/hive_plus?logo=codecov&logoColor=fff&labelColor=333940">
   </a>
-  <a href="https://t.me/isarplus">
+  <a href="https://t.me/isarplus" style="text-decoration: none;">
     <img src="https://img.shields.io/static/v1?label=join&message=Isar%20%26%20Hive&labelColor=333940&logo=telegram&logoColor=white&color=229ED9">
   </a>
 </p>
