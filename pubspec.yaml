@@ -1,6 +1,6 @@
 name: hive_plus_secure
 description: Lightweight and buzzing-fast key-value database made for Flutter and Dart.
-version: 1.1.25
+version: 1.1.26
 homepage: https://github.com/ahmtydn/hive_plus
 documentation: https://github.com/ahmtydn/hive_plus
 issue_tracker: https://github.com/ahmtydn/hive_plus/issues
