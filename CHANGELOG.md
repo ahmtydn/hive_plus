@@ -1,4 +1,11 @@
 ````markdown
+
+# 1.1.26
+
+### Improvements
+
+- Updated dependency `isar_plus` to version `^1.2.2`
+
 # 1.1.25
 
 ### Features

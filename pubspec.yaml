@@ -17,7 +17,7 @@ environment:
   sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
-  isar_plus: ^1.1.5
+  isar_plus: ^1.2.2
   meta: ^1.9.0
 
 dev_dependencies:
